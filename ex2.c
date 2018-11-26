@@ -39,21 +39,17 @@ void stock_truncated_str(char store_array[arr_size][arr_size], char str[])
 {
     int line=0;
     int col=0;
-    int space_flag=0;                       //flag to know if the last character was a space
 
     for (int index=0; index<strlen(str); index++)
     {
-        if (str[index]==0x20)               //switch line and reset column when there is a space in the string
-            space_flag =1;
-        else                                //stock character by character in the array
+        if (str[index]!=0x20)
         {
-            if (space_flag)
+            if (str[index-1]==0x20)                         //switch line and reset column when there is a space in the string
             {
-                space_flag = 0;
                 col = 0;
                 line++;
             }
-            store_array[line][col] = str[index];
+            store_array[line][col] = str[index];            //stock character by character in the array
             col++;
         }
     }
